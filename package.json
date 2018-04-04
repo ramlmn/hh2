@@ -8,6 +8,10 @@
   },
   "author": "@mram",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ramlmn/hh2"
+  },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
