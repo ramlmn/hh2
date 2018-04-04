@@ -1,5 +1,5 @@
 {
-  "name": "hh2",
+  "name": "@ramlmn/hh2",
   "version": "0.1.0",
   "description": "A wrapper to create instances of node http, https and http2 servers",
   "main": "index.js",
@@ -12,6 +12,13 @@
     "type": "git",
     "url": "https://github.com/ramlmn/hh2"
   },
+  "keywords": [
+    "server",
+    "wrapper",
+    "http",
+    "https",
+    "http2"
+  ],
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
