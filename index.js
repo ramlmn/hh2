@@ -40,13 +40,13 @@ const createServer = (handler, opts) => {
  *
  * @return {Object}
  */
-const hh2 = (app, options = {}) => {
+const hh2 = (handler, options = {}) => {
   const opts = Object.assign({}, options);
   const types = ['http', 'https', 'http2'];
 
   opts.secure = !!opts.secure;
 
-  if (typeof app !== 'function') {
+  if (typeof handler !== 'function') {
     throw new TypeError('\'handler\' is not an instance of net.Server');
   }
 
@@ -61,13 +61,11 @@ const hh2 = (app, options = {}) => {
 
   if (opts.secure && opts.type === 'http') {
     opts.type = 'https';
-  }
-
-  if (opts.type === 'https' && opts.secure === false) {
+  } else if (opts.type === 'https' && opts.secure === false) {
     opts.secure = true;
   }
 
-  return createServer(app, opts);
+  return createServer(handler, opts);
 };
 
 
