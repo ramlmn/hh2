@@ -6,21 +6,22 @@ A wrapper to create instances of node http, https and http2 servers.
 
 ``` js
 const options = {
-  type: String,
+  h2: Boolean
   secure: Boolean,
+  ..., // other options for the server
 };
 
 const server = hh2(app, options);
 ```
 
-The app is a function to handle the `request` event of
-[net.Server](https://nodejs.org/api/net.html#net_class_net_server). It can any
-function like an instance of [express](https://github.com/expressjs/express).
+The `app` is a `requestListener` for
+[node http request](https://nodejs.org/api/http.html#http_event_request).
 
-The `type` inside options takes values like `http` or `https` or `http2`. The
-secure option is to create a `secureServer`.
+The `h2` options is used to create `http2` server and the secure option is to
+create a `secureServer` variant of `http` or `http2`. By default a `http` server
+is created.
 
-hh2 creates the appropriate server and returns an instance of
+Simply put, `hh2` creates the appropriate server and returns an instance of
 [net.Server](https://nodejs.org/api/net.html#net_class_net_server).
 
 ### https server
@@ -30,9 +31,9 @@ const hh2 = require('@ramlmn/hh2');
 const app = express();
 
 const server = hh2(app, {
-  type: 'https',
+  secure: true,           // <- explicit https
 
-  // https enables secure
+  // certs as options
   key: fs.readFileSync('server-key.pem'),
   cert: fs.readFileSync('server-cert.pem'),
 });
@@ -49,7 +50,7 @@ const hh2 = require('@ramlmn/hh2');
 const app = express();
 
 const server = hh2(app, {
-  type: 'http2',
+  h2: true                // <- explicit http2
   secure: true,
 
   // http2 in SSL

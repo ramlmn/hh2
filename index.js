@@ -5,30 +5,23 @@ const https = require('https');
 const http2 = require('http2');
 
 /**
- *
  * @param {function} handler request handler
  * @param {Object} opts options for server
  *
  * @returns {Object}
  */
 const createServer = (handler, opts) => {
-  let server = null;
-
-  if (opts.secure) {
-    if (opts.type === 'http2') {
-      server = http2.createSecureServer(opts, handler);
+  if (opts.h2) {
+    if (opts.secure) {
+      return http2.createSecureServer(opts, handler);
     } else {
-      server = https.createServer(opts, handler);
+      return http2.createServer(handler);
     }
-  } else {
-    if (opts.type === 'http2') {
-      server = http2.createServer(handler);
-    } else {
-      server = http.createServer(handler);
-    }
+  } else if (opts.secure) {
+    return https.createServer(opts, handler);
   }
 
-  return server;
+  return http.createServer(handler);
 };
 
 
@@ -42,27 +35,12 @@ const createServer = (handler, opts) => {
  */
 const hh2 = (handler, options = {}) => {
   const opts = Object.assign({}, options);
-  const types = ['http', 'https', 'http2'];
 
   opts.secure = !!opts.secure;
+  opts.h2 = !!opts.h2;
 
   if (typeof handler !== 'function') {
     throw new TypeError('\'handler\' is not an instance of net.Server');
-  }
-
-  if (typeof opts.type !== 'string') {
-    throw new TypeError('\'opts.type\' is not of type string');
-  }
-
-  opts.type = opts.type.toLowerCase();
-  if (!types.includes(opts.type)) {
-    throw new Error('\'opts.type\' can be only \'http\' or \'https\' or \'http2\'');
-  }
-
-  if (opts.secure && opts.type === 'http') {
-    opts.type = 'https';
-  } else if (opts.type === 'https' && opts.secure === false) {
-    opts.secure = true;
   }
 
   return createServer(handler, opts);
