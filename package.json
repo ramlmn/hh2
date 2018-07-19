@@ -1,6 +1,6 @@
 {
   "name": "@ramlmn/hh2",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A wrapper to create instances of node http, https and http2 servers",
   "main": "index.js",
   "scripts": {
