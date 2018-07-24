@@ -1,6 +1,6 @@
 # hh2
 
-A wrapper to create instances of node http, https and http2 servers.
+A zero-dependency wrapper to create various instances of node http interfaces.
 
 ## Usage
 

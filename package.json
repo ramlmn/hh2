@@ -1,12 +1,15 @@
 {
   "name": "@ramlmn/hh2",
-  "version": "0.2.2",
-  "description": "A wrapper to create instances of node http, https and http2 servers",
+  "version": "0.2.3",
+  "author": "@r0mflip",
+  "description": "A zero-dependency wrapper to create various instances of node http interfaces",
   "main": "index.js",
   "scripts": {
     "test": "eslint . && node test/test.js"
   },
-  "author": "@mram",
+  "engines": {
+    "node": ">=8"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
