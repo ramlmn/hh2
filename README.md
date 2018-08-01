@@ -1,5 +1,7 @@
 # hh2
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ramlmn/hh2.svg)](https://greenkeeper.io/)
+
 A zero-dependency wrapper to create various instances of node http interfaces.
 
 ## Usage
